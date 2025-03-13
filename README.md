@@ -65,16 +65,6 @@ Ensure the following configurations are properly set:
 
 ---
 
-## **🔹 Run Code Locally**
-
-Start the development server:
-
-```bash
-npm run dev
-```
-
----
-
 ## **🔹 Manage Migrations**
 
 Run migrations for the **default environment**:
@@ -87,6 +77,16 @@ Run migrations for the **testing environment**:
 
 ```bash
 npm run migrate:testing
+```
+
+---
+
+## **🔹 Run Code Locally**
+
+Start the development server:
+
+```bash
+npm run dev
 ```
 
 ---
