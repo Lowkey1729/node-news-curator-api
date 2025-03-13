@@ -74,7 +74,7 @@ npm run dev
 Run migrations for the **default environment**:
 
 ```bash
-npx sequelize-cli db:migrate
+npm run migrate
 ```
 
 Run migrations for the **testing environment**:
