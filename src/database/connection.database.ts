@@ -25,5 +25,3 @@ const connection = () => {
 }
 
 connection();
-
-export default sequelize;

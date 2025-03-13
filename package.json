@@ -14,9 +14,11 @@
   "description": "",
   "dependencies": {
     "cors": "^2.8.5",
+    "dayjs": "^1.11.13",
     "express": "^4.21.2",
     "http-status-codes": "^2.3.0",
     "mysql2": "^3.13.0",
+    "pino": "^9.6.0",
     "sequelize": "^6.37.6",
     "sequelize-typescript": "^2.1.6"
   },
@@ -28,5 +30,13 @@
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.8.2"
+  },
+  "_moduleAliases": {
+    "@app": "src",
+    "@config": "src/config",
+    "@database": "src/database",
+    "@middlewares": "src/middlewares",
+    "@models": "src/models",
+    "@modules": "src/modules"
   }
 }
