@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { StatusCodes } from 'http-status-codes'
 
-import { AppError } from '@app/shared/errors'
+import {AppError, NotFoundError} from '@app/shared/errors'
 import {logger} from "@app/config/logger.config";
 
 export function setErrorHandler(error: any, req: Request, res: Response, next: NextFunction): void {
@@ -32,4 +32,11 @@ export function setErrorHandler(error: any, req: Request, res: Response, next: N
     success: false,
     message
   })
+}
+
+
+export function notFoundHandler(req: Request, res: Response, next: NextFunction): void {
+    const error = new NotFoundError('Not Found');
+    error.statusCode = 404;
+    return next(error)
 }

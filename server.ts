@@ -3,7 +3,7 @@ import cors from "cors";
 import 'express-async-errors'
 import { StatusCodes } from "http-status-codes";
 import "@app/database/connection.database"
-import {setErrorHandler} from "@app/middlewares/error.middleware";
+import {notFoundHandler, setErrorHandler} from "@app/middlewares/error.middleware";
 import {logger} from "@app/config/logger.config";
 import {server} from "@app/config/app.config";
 import routes from './src/routes/index.routes'
@@ -23,6 +23,7 @@ app.get("/health", (_: Request, res: Response) => {
     res.status(StatusCodes.OK).json({ message: "I am alive" });
 });
 
+app.use(notFoundHandler);
 app.use(setErrorHandler)
 
 // Start Server
