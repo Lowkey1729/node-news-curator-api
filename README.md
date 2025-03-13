@@ -67,13 +67,13 @@ Ensure the following configurations are properly set:
 
 ## **🔹 Manage Migrations**
 
-Run migrations for the **default environment**:
+Run migrations for the **local environment**:
 
 ```bash
 npm run migrate:local
 ```
 
-Run migrations for the **testing environment**:
+Run migrations for the **test environment**:
 
 ```bash
 npm run migrate:testing
