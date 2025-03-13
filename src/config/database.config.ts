@@ -1,7 +1,7 @@
 import { config } from "dotenv";
 import type { Dialect } from "sequelize";
 
-config(); // Load environment variables
+config({path: `.env.${process.env.NODE_ENV || 'local'}`});
 
 interface ISequelizeConfig {
   [key: string]: {

@@ -5,7 +5,7 @@ import app from "../../../../server";
 
 describe("Create Article API", () => {
   beforeEach(async () => {
-    await Article.destroy({ where: {}, truncate: true }); // Clears the table before each test
+    await sequelize.sync({ force: true }); // Clears data before each test
   });
 
   afterAll(async () => {

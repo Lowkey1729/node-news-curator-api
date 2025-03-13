@@ -5,7 +5,7 @@ import app from "../../../../server";
 
 describe("Fetch Articles API", () => {
     beforeEach(async () => {
-        await Article.destroy({ where: {}, truncate: true }); // Clears the table before each test
+        await sequelize.sync({ force: true });
     });
 
     afterAll(async () => {
@@ -29,14 +29,14 @@ describe("Fetch Articles API", () => {
 
     test("it applies a limit to articles", async () => {
         await Article.bulkCreate(
-            Array.from({length: 30}, (_, i) => ({
+            Array.from({length: 3}, (_, i) => ({
                 title: `Article ${i + 1}`,
                 url: `https://example.com/article-${i + 1}`,
                 content: `Test with me ${i + 1}`,
             })),
         );
 
-        const response = await request(app).get("/api/v1/articles?limit=23");
+        const response = await request(app).get("/api/v1/articles?limit=1");
         expect(response.status).toBe(200);
         expect(response.body).toMatchObject({
             success: true,
@@ -103,15 +103,15 @@ describe("Fetch Articles API", () => {
 
     test("it paginates articles and fetches the correct page", async () => {
         await Article.bulkCreate(
-            Array.from({length: 40}, (_, i) => ({
+            Array.from({length: 5}, (_, i) => ({
                 title: `Article ${i + 1}`,
                 url: `https://example.com/article-${i + 1}`,
                 content: `Test with me ${i + 1}`,
             })),
         );
 
-        const page = 4;
-        const response = await request(app).get(`/api/v1/articles?page=${page}`);
+        const page = 2;
+        const response = await request(app).get(`/api/v1/articles?page=${page}&limit=1`);
         expect(response.status).toBe(200);
         expect(response.body).toMatchObject({
             success: true,

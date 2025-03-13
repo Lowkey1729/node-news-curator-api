@@ -44,10 +44,16 @@ npm install
 
 ### **1️⃣ Create `.env` File**
 
-Copy `.env.example` to `.env`:
+Copy `.env.example` to `.env.local`:
 
 ```bash
-cp .env.example .env
+cp .env.example .env.local
+```
+
+Copy `.env.example` to `.env.test`:
+
+```bash
+cp .env.example .env.test
 ```
 
 ### **2️⃣ Update Environment Variables**
@@ -74,13 +80,13 @@ npm run dev
 Run migrations for the **default environment**:
 
 ```bash
-npm run migrate
+npm run migrate:local
 ```
 
 Run migrations for the **testing environment**:
 
 ```bash
-npx sequelize-cli db:migrate --env=testing
+npm run migrate:testing
 ```
 
 ---

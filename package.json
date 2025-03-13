@@ -3,15 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --exit-child -r tsconfig-paths/register --env-file=.env server.ts",
+    "dev": "ts-node-dev --respawn --exit-child -r tsconfig-paths/register --env-file=.env.local server.ts",
     "clean": "rm -rf build && mkdir build",
     "build": "yarn clean && yarn build-server",
     "build-server": "tsc",
     "start": "node build/index.js",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",
-    "migrate": "sequelize-cli db:migrate --env=local",
-    "test": "jest"
+    "migrate:local": "NODE_ENV=local sequelize-cli db:migrate",
+    "migrate:test": "NODE_ENV=test sequelize-cli db:migrate",
+    "test": "jest --verbose --runInBand"
   },
   "author": "Mojeed Olarewaju",
   "license": "ISC",
