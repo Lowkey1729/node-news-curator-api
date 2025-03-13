@@ -1,0 +1,32 @@
+{
+  "name": "news-curator-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --exit-child -r tsconfig-paths/register --env-file=.env server.ts",
+    "clean": "rm -rf build && mkdir build",
+    "build": "yarn clean && yarn build-server",
+    "build-server": "tsc",
+    "start": "node build/index.js"
+  },
+  "author": "Mojeed Olarewaju",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "http-status-codes": "^2.3.0",
+    "mysql2": "^3.13.0",
+    "sequelize": "^6.37.6",
+    "sequelize-typescript": "^2.1.6"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.10",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.8.2"
+  }
+}
