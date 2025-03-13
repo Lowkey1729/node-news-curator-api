@@ -5,13 +5,16 @@ import { successResponse } from "@app/shared/utils";
 import { createArticleDto } from "@app/modules/articles/schemas/create-article.schema";
 import { StatusCodes } from "http-status-codes";
 import { updateArticleDto } from "@app/modules/articles/schemas/update-article.schema";
+import { fetchArticlesDto } from "@app/modules/articles/schemas/fetch-articles.schema";
 
 @injectable()
 export class ArticlesController {
   constructor(private readonly articleService: ArticleService) {}
 
   index = async (req: Request, res: Response) => {
-    const data = await this.articleService.fetchArticles(req.query);
+    const data = await this.articleService.fetchArticles(
+      req.query as fetchArticlesDto,
+    );
 
     successResponse({ res, data });
   };

@@ -1,27 +1,28 @@
 import { injectable } from "tsyringe";
 import { ServiceResponse } from "@app/shared/types";
-import { Op } from "sequelize";
+import { Op, WhereOptions } from "sequelize";
 import Article from "@app/models/article.model";
 import { createArticleDto } from "@app/modules/articles/schemas/create-article.schema";
 import { updateArticleDto } from "@app/modules/articles/schemas/update-article.schema";
 import { NotFoundError } from "@app/shared/errors";
+import { fetchArticlesDto } from "@app/modules/articles/schemas/fetch-articles.schema";
 
 @injectable()
 export class ArticleService {
   constructor() {}
 
-  async fetchArticles(data: any): Promise<ServiceResponse> {
+  async fetchArticles(data: fetchArticlesDto): Promise<ServiceResponse> {
     const {
       title,
       views,
       clicks,
       sort_by = "created_at",
-      direction = "DESC",
+      direction = "desc",
       limit = 15,
       page = 1,
     } = data;
 
-    const whereClause: any = {};
+    const whereClause: WhereOptions = {};
 
     if (title) whereClause.title = { [Op.like]: `${title}%` };
     if (views) whereClause.views = Number(views);

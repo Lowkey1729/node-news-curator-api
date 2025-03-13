@@ -1,10 +1,10 @@
 import { Response } from "express";
 
-export type ServiceResponse = {
+export type ServiceResponse<T = unknown, E = unknown> = {
   success: boolean;
   message: string;
-  data?: any;
-  errors?: any;
+  data?: T;
+  errors?: E;
 };
 
 export type RDM = {

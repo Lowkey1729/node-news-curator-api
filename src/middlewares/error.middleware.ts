@@ -14,10 +14,11 @@ export function setErrorHandler(
     next(error);
   }
 
-  const code = error.statusCode ?? StatusCodes.INTERNAL_SERVER_ERROR;
-  const name = error.name;
-  const errName = !name || name === "Error" ? "INTERNAL SERVER ERROR" : name;
-  const message =
+  const code: number = error.statusCode ?? StatusCodes.INTERNAL_SERVER_ERROR;
+  const name: string = error.name;
+  const errName: string =
+    !name || name === "Error" ? "INTERNAL SERVER ERROR" : name;
+  const message: string =
     error instanceof AppError
       ? error.message
       : "We are unable to process your request. please try again later or contact support";
@@ -46,5 +47,5 @@ export function notFoundHandler(
 ): void {
   const error = new NotFoundError("Not Found");
   error.statusCode = 404;
-  return next(error);
+  next(error);
 }
