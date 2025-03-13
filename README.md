@@ -91,16 +91,6 @@ npm run dev
 
 ---
 
-## **🔹 Run Linter**
-
-Check code formatting and linting:
-
-```bash
-npm run lint
-```
-
----
-
 ## **🔹 Run Test Cases**
 
 Execute the test suite using Jest:
