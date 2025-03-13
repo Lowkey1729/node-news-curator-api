@@ -1,19 +1,19 @@
-import {z} from 'zod'
-import {StatusCodes} from 'http-status-codes'
-import {Request, Response, NextFunction} from 'express'
+import { z } from "zod";
+import { StatusCodes } from "http-status-codes";
+import { Request, Response, NextFunction } from "express";
 
 export const validate = (rules: z.ZodObject<any>) => {
-    return (req: Request, res: Response, next: NextFunction) => {
-        const {success, error} = rules.safeParse(req.body)
+  return (req: Request, res: Response, next: NextFunction) => {
+    const { success, error } = rules.safeParse(req.body);
 
-        if (success) {
-            return next()
-        }
-
-        res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({
-            status: false,
-            message: 'One or more validation errors occurred',
-            errors: error
-        })
+    if (success) {
+      return next();
     }
-}
+
+    res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({
+      status: false,
+      message: "One or more validation errors occurred",
+      errors: error,
+    });
+  };
+};

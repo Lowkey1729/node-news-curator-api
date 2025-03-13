@@ -1,7 +1,7 @@
 type RoutePrefix = {
-  coreRouteV1: string
-}
+  coreRouteV1: string;
+};
 
 export const routePrefix: RoutePrefix = {
-  coreRouteV1: '/api/v1'
-}
+  coreRouteV1: "/api/v1",
+};

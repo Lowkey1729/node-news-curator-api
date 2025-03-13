@@ -7,7 +7,9 @@
     "clean": "rm -rf build && mkdir build",
     "build": "yarn clean && yarn build-server",
     "build-server": "tsc",
-    "start": "node build/index.js"
+    "start": "node build/index.js",
+    "lint": "eslint . --ext=.ts",
+    "format": "prettier --write ."
   },
   "author": "Mojeed Olarewaju",
   "license": "ISC",
@@ -29,13 +31,21 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.22.0",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/node": "^22.13.10",
+    "@typescript-eslint/eslint-plugin": "^8.26.1",
+    "@typescript-eslint/parser": "^8.26.1",
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "^10.1.1",
+    "globals": "^16.0.0",
+    "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.26.1"
   },
   "_moduleAliases": {
     "@app": "src"

@@ -1,33 +1,33 @@
-import { StatusCodes } from 'http-status-codes'
+import { StatusCodes } from "http-status-codes";
 
-import { AppError } from './app.error'
+import { AppError } from "./app.error";
 
 export class NotFoundError extends AppError {
   constructor(message: string, methodName?: string) {
-    super(message, StatusCodes.NOT_FOUND, methodName)
+    super(message, StatusCodes.NOT_FOUND, methodName);
   }
 }
 
 export class ConflictError extends AppError {
   constructor(message: string, methodName?: string) {
-    super(message, StatusCodes.CONFLICT, methodName)
+    super(message, StatusCodes.CONFLICT, methodName);
   }
 }
 
 export class UnAuthorizedError extends AppError {
   constructor(message: string, methodName?: string) {
-    super(message, StatusCodes.UNAUTHORIZED, methodName)
+    super(message, StatusCodes.UNAUTHORIZED, methodName);
   }
 }
 
 export class ValidatorError extends AppError {
   constructor(message: string, methodName?: string) {
-    super(message, StatusCodes.UNPROCESSABLE_ENTITY, methodName)
+    super(message, StatusCodes.UNPROCESSABLE_ENTITY, methodName);
   }
 }
 
 export class BadRequestError extends AppError {
   constructor(message: string, methodName?: string) {
-    super(message, StatusCodes.BAD_REQUEST, methodName)
+    super(message, StatusCodes.BAD_REQUEST, methodName);
   }
 }
