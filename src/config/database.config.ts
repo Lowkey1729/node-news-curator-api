@@ -10,6 +10,7 @@ interface ISequelizeConfig {
     database: string;
     host: string;
     dialect: Dialect;
+    port: number;
   };
 }
 
@@ -19,6 +20,7 @@ export const dbConfig = {
   database: process.env.DB_NAME || "news_curator_api_db",
   host: process.env.DB_HOST || "localhost",
   dialect: (process.env.DB_DIALECT as Dialect) || "mysql",
+  port: Number(process.env.DB_PORT || 3306),
 };
 
 const sequelizeConfig: ISequelizeConfig = {

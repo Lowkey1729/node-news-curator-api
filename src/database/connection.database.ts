@@ -20,6 +20,7 @@ class Database {
           dialect: dbConfig.dialect,
           models: [path.join(__dirname, "../models/**/*.model.ts")],
           logging: false,
+            port: dbConfig.port
         },
       );
 
