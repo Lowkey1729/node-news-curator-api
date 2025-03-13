@@ -1,11 +1,30 @@
-import { Dialect } from "sequelize";
+import { config } from "dotenv";
+import type { Dialect } from "sequelize";
 
-export const db = {
-  db_host: process.env.DB_HOST || "localhost",
-  db_user: process.env.DB_USER || "root",
-  db_password: process.env.DB_PASSWORD || "password",
-  db_name: process.env.DB_NAME || "news_curator_api_db",
-  db_dialect: (process.env.DB_DIALECT as Dialect) || "mysql",
+config(); // Load environment variables
+
+interface ISequelizeConfig {
+  [key: string]: {
+    username: string;
+    password: string;
+    database: string;
+    host: string;
+    dialect: Dialect;
+  };
+}
+
+export const dbConfig = {
+  username: process.env.DB_USER || "root",
+  password: process.env.DB_PASSWORD || "password",
+  database: process.env.DB_NAME || "news_curator_api_db",
+  host: process.env.DB_HOST || "localhost",
+  dialect: (process.env.DB_DIALECT as Dialect) || "mysql",
 };
 
-export default db;
+const sequelizeConfig: ISequelizeConfig = {
+  local: dbConfig,
+  test: dbConfig,
+  production: dbConfig,
+};
+
+export default sequelizeConfig;
