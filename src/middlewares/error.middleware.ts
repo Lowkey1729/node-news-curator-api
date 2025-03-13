@@ -4,7 +4,7 @@ import { StatusCodes } from 'http-status-codes'
 import { AppError } from '@app/shared/errors'
 import {logger} from "@app/config/logger.config";
 
-export function setErrorHandler(error: any, req: Request, res: Response, next: NextFunction) {
+export function setErrorHandler(error: any, req: Request, res: Response, next: NextFunction): void {
   if (res.headersSent) {
     return next(error)
   }
@@ -28,7 +28,7 @@ export function setErrorHandler(error: any, req: Request, res: Response, next: N
     errName
   )
 
-  return res.status(code).json({
+  res.status(code).json({
     success: false,
     message
   })

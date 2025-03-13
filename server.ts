@@ -1,14 +1,18 @@
-import express, { Request, Response, Application } from "express";
+import express, { Request, Response} from "express";
 import cors from "cors";
 import { StatusCodes } from "http-status-codes";
 import "@app/database/connection.database"
+import {setErrorHandler} from "@app/middlewares/error.middleware";
+import {logger} from "@app/config/logger.config";
+import {server} from "@app/config/app.config";
 
-const app: Application = express();
+const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(setErrorHandler)
 
 // Health Check Route
 app.get("/health", (_: Request, res: Response) => {
@@ -16,7 +20,6 @@ app.get("/health", (_: Request, res: Response) => {
 });
 
 // Start Server
-const PORT: number | 5000 = Number(process.env.PORT) || 5000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+app.listen(server.port, () => {
+    logger.info('🚀🚀 Server is listening on port %o in %s mode', server.port, server.env)
 });

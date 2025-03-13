@@ -1,14 +1,15 @@
 import db from "@app/config/database.config";
 import {Sequelize} from 'sequelize-typescript'
 import path from "path";
+import {logger} from "@app/config/logger.config";
 
 const sequelize = new Sequelize(
-    db.DB_NAME,
-    db.DB_USER,
-    db.DB_PASSWORD,
+    db.db_name,
+    db.db_user,
+    db.db_password,
     {
-        host: db.DB_HOST,
-        dialect: db.DB_DIALECT,
+        host: db.db_host,
+        dialect: db.db_dialect,
         models: [path.join(__dirname, '../models/**/*.model.ts')],
         logging: false
     }
@@ -17,7 +18,7 @@ const sequelize = new Sequelize(
 const connection = () => {
     sequelize.authenticate()
         .then(() => {
-            console.log("db connected successfully!.");
+            logger.info('🚀🚀 %s db connected successfully!', db.db_dialect)
         })
         .catch(err => {
             console.error(err);
