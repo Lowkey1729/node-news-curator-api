@@ -28,17 +28,15 @@ app.get("/health", (_: Request, res: Response) => {
 app.use(notFoundHandler);
 app.use(setErrorHandler);
 
-
-
 //Do not listen to any port when the application is on test mode
-if (! ["test", "testing"].includes(server.env?.toLowerCase() || "")) {
+if (!["test", "testing"].includes(server.env?.toLowerCase() || "")) {
   app.listen(server.port, () => {
     logger.info(
-        "🚀🚀 Server is listening on port %o in %s mode",
-        server.port,
-        server.env,
+      "🚀🚀 Server is listening on port %o in %s mode",
+      server.port,
+      server.env,
     );
   });
 }
 
-export default app
+export default app;
