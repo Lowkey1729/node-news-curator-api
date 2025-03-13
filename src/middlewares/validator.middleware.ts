@@ -11,7 +11,7 @@ export const validate = (rules: z.ZodObject<any>) => {
     }
 
     res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({
-      status: false,
+      success: false,
       message: "One or more validation errors occurred",
       errors: error,
     });

@@ -3,7 +3,7 @@ import { Sequelize } from "sequelize-typescript";
 import path from "path";
 import { logger } from "@app/config/logger.config";
 
-const sequelize = new Sequelize(
+export const sequelize = new Sequelize(
   dbConfig.database,
   dbConfig.username,
   dbConfig.password,
@@ -27,3 +27,5 @@ const connection = () => {
 };
 
 connection();
+
+export default sequelize;
