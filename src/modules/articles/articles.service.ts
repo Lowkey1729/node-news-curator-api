@@ -3,6 +3,8 @@ import {ServiceResponse} from "@app/shared/types";
 import {Op} from "sequelize";
 import Article from "@app/models/article.model";
 import {createArticleDto} from "@app/modules/articles/schemas/create-article.schema";
+import {updateArticleDto} from "@app/modules/articles/schemas/update-article.schema";
+import {NotFoundError} from "@app/shared/errors";
 
 @injectable()
 export class ArticleService {
@@ -49,9 +51,7 @@ export class ArticleService {
 
     async fetchArticleById(id: number): Promise<ServiceResponse> {
         const article = await Article.findByPk(id);
-        if (!article) {
-            throw new Error("Article not found");
-        }
+        if (!article) throw new NotFoundError("Article not found");
 
         return {
             success: true,
@@ -70,9 +70,34 @@ export class ArticleService {
         }
     }
 
-    async updateArticle() {
+    async updateArticle(id: number, data: updateArticleDto): Promise<ServiceResponse> {
+        const article = await Article.findByPk(id);
+        if (!article) throw new NotFoundError("Article not found");
+
+        const filteredData = Object.fromEntries(
+            Object.entries(data).filter(([_, value]) => value !== null)
+        );
+
+        await article.update(filteredData);
+
+        return {
+            success: true,
+            message: 'Article updated successfully.',
+            data: []
+        }
     }
 
-    async recordArticleClick() {
+    async recordArticleClick(id: number): Promise<ServiceResponse> {
+        const article = await Article.findByPk(id);
+        if (!article) throw new NotFoundError("Article not found");
+
+        article.clicks = (article.clicks || 0) + 1;
+        await article.save();
+
+        return {
+            success: true,
+            message: 'Click recorded successfully.',
+            data: []
+        }
     }
 }

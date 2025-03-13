@@ -4,6 +4,7 @@ import {Request, Response} from "express";
 import {successResponse} from "@app/shared/utils";
 import {createArticleDto} from "@app/modules/articles/schemas/create-article.schema";
 import {StatusCodes} from "http-status-codes";
+import {updateArticleDto} from "@app/modules/articles/schemas/update-article.schema";
 
 
 @injectable()
@@ -23,9 +24,10 @@ export class ArticlesController {
     }
 
     update = async (req: Request, res: Response) => {
-        await this.articleService.updateArticle()
+        const id = parseInt(req.params.id);
+        const data = await this.articleService.updateArticle(id,req.body as updateArticleDto )
 
-        successResponse({res})
+        successResponse({res, data})
     }
 
     show = async (req: Request, res: Response) => {
@@ -36,8 +38,9 @@ export class ArticlesController {
     }
 
     click = async (req: Request, res: Response) => {
-        await this.articleService.recordArticleClick()
+        const id = parseInt(req.params.id);
+        const data = await this.articleService.recordArticleClick(id)
 
-        successResponse({res})
+        successResponse({res, data})
     }
 }

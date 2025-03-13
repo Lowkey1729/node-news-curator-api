@@ -11,6 +11,6 @@ router.get('/', articlesController.index)
 router.post('/', validate(createArticleSchema), articlesController.store)
 router.put('/:id', articlesController.update)
 router.get('/:id', articlesController.show)
-router.get('/:id/click', articlesController.click)
+router.post('/:id/click', articlesController.click)
 
 export { router as articleRouter }

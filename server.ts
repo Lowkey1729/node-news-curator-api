@@ -1,5 +1,6 @@
 import express, { Request, Response} from "express";
 import cors from "cors";
+import 'express-async-errors'
 import { StatusCodes } from "http-status-codes";
 import "@app/database/connection.database"
 import {setErrorHandler} from "@app/middlewares/error.middleware";
