@@ -5,39 +5,38 @@ import { logger } from "@app/config/logger.config";
 import * as process from "node:process";
 
 class Database {
-    private static instance: Sequelize;
+  private static instance: Sequelize;
 
-    private constructor() {}
+  private constructor() {}
 
-    public static getInstance(): Sequelize {
-        if (!Database.instance) {
-            Database.instance = new Sequelize(
-                dbConfig.database,
-                dbConfig.username,
-                dbConfig.password,
-                {
-                    host: dbConfig.host,
-                    dialect: dbConfig.dialect,
-                    models: [path.join(__dirname, "../models/**/*.model.ts")],
-                    logging: false,
-                }
-            );
+  public static getInstance(): Sequelize {
+    if (!Database.instance) {
+      Database.instance = new Sequelize(
+        dbConfig.database,
+        dbConfig.username,
+        dbConfig.password,
+        {
+          host: dbConfig.host,
+          dialect: dbConfig.dialect,
+          models: [path.join(__dirname, "../models/**/*.model.ts")],
+          logging: false,
+        },
+      );
 
-            Database.instance
-                .authenticate()
-                .then(() => {
-                    if (process.env.NODE_ENV !== "test") {
-                        logger.info("🚀🚀 %s db connected successfully!", dbConfig.dialect);
-                    }
-
-                })
-                .catch((err) => {
-                    console.error("Database connection error:", err);
-                });
-        }
-
-        return Database.instance;
+      Database.instance
+        .authenticate()
+        .then(() => {
+          if (process.env.NODE_ENV !== "test") {
+            logger.info("🚀🚀 %s db connected successfully!", dbConfig.dialect);
+          }
+        })
+        .catch((err) => {
+          console.error("Database connection error:", err);
+        });
     }
+
+    return Database.instance;
+  }
 }
 
 export const sequelize = Database.getInstance();
