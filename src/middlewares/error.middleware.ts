@@ -6,7 +6,7 @@ import {logger} from "@app/config/logger.config";
 
 export function setErrorHandler(error: any, req: Request, res: Response, next: NextFunction): void {
   if (res.headersSent) {
-    return next(error)
+    next(error)
   }
 
   const code = error.statusCode ?? StatusCodes.INTERNAL_SERVER_ERROR

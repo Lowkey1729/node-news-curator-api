@@ -13,14 +13,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(setErrorHandler)
 
 routes(app)
+
 
 // Health Check Route
 app.get("/health", (_: Request, res: Response) => {
     res.status(StatusCodes.OK).json({ message: "I am alive" });
 });
+
+app.use(setErrorHandler)
 
 // Start Server
 app.listen(server.port, () => {

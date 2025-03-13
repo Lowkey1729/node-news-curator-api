@@ -2,6 +2,8 @@ import {injectable} from "tsyringe";
 import {ArticleService} from "@app/modules/articles/articles.service";
 import {Request, Response} from "express";
 import {successResponse} from "@app/shared/utils";
+import {createArticleDto} from "@app/modules/articles/schemas/create-article.schema";
+import {StatusCodes} from "http-status-codes";
 
 
 @injectable()
@@ -15,9 +17,9 @@ export class ArticlesController {
     }
 
     store = async (req: Request, res: Response) => {
-        await this.articleService.createArticle()
+        const data = await this.articleService.createArticle(req.body as createArticleDto)
 
-        successResponse({res})
+        successResponse({res: res, data: data, statusCode: StatusCodes.CREATED})
     }
 
     update = async (req: Request, res: Response) => {

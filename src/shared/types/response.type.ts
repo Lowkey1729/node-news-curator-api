@@ -4,7 +4,7 @@ export type ServiceResponse = {
   success: boolean
   message: string
   data?: any,
-  error?: any
+  errors?: any
 }
 
 export type RDM = {

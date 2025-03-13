@@ -2,6 +2,7 @@ import {injectable} from "tsyringe";
 import {ServiceResponse} from "@app/shared/types";
 import {Op} from "sequelize";
 import Article from "@app/models/article.model";
+import {createArticleDto} from "@app/modules/articles/schemas/create-article.schema";
 
 @injectable()
 export class ArticleService {
@@ -59,7 +60,14 @@ export class ArticleService {
         }
     }
 
-    async createArticle() {
+    async createArticle(data: createArticleDto): Promise<ServiceResponse> {
+        await Article.create(data)
+
+        return {
+            success: true,
+            message: 'Article created successfully.',
+            data: []
+        }
     }
 
     async updateArticle() {

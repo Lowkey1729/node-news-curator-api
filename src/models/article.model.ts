@@ -1,4 +1,6 @@
-import {Column, CreatedAt, DataType, Model, Table, UpdatedAt} from "sequelize-typescript";
+import {BeforeCreate, BeforeUpdate, Column, CreatedAt, DataType, Model, Table, UpdatedAt} from "sequelize-typescript";
+import {format} from "date-fns";
+import slugify from "slugify";
 
 @Table({
     tableName: 'articles',
@@ -20,7 +22,7 @@ class Article extends Model{
 
     @Column({
         type: DataType.STRING,
-        allowNull: false,
+        allowNull: true,
     })
     declare slug: string;
 
@@ -32,13 +34,13 @@ class Article extends Model{
 
     @Column({
         type: DataType.INTEGER,
-        allowNull: false,
+        allowNull: true,
     })
     declare views: number;
 
     @Column({
         type: DataType.INTEGER,
-        allowNull: false,
+        allowNull: true,
     })
     declare clicks: number;
 
@@ -47,6 +49,23 @@ class Article extends Model{
 
     @UpdatedAt
     declare updated_at: Date
+
+    @BeforeCreate
+    static generateSlug(instance: Article) {
+        instance.slug = Article.createSlug(instance.title);
+    }
+
+    @BeforeUpdate
+    static updateSlug(instance: Article) {
+        if (instance.changed("title")) {
+            instance.slug = Article.createSlug(instance.title);
+        }
+    }
+
+    static createSlug(title: string): string {
+        const timestamp = format(new Date(), "yyyyMMddHHmmssSSS");
+        return `${slugify(title, { lower: true, strict: true })}-${timestamp}`;
+    }
 }
 
 export default Article
